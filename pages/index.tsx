@@ -4,8 +4,24 @@ import Head from 'next/head';
 import styles from '../styles/Home.module.css';
 import TokenSection from '../components/TokenSection';
 import AMMSection from '../components/AMMSection';
+import { useEffect, useState } from 'react';
+import { useAccount, useContractRead } from 'wagmi';
+import { ADDRESSES } from '../constants/addresses';
+import { ERC20ABI } from '../constants/ABIs/ERC20';
 
 const Home: NextPage = () => {
+
+  const { address } = useAccount();
+
+  const { data, isError, isLoading } = useContractRead({
+    address: ADDRESSES['JPY'],
+    abi: ERC20ABI,
+    functionName: "balanceOf",
+    args: [address!]
+  })
+
+  console.log({ address, data, isError, isLoading })
+
   return (
     <div className={styles.container}>
       <Head>
@@ -20,10 +36,10 @@ const Home: NextPage = () => {
       <main className={styles.main}>
         <ConnectButton />
 
-        {/* <TokenSection /> */}
+        <TokenSection />
 
         <AMMSection />
- 
+
       </main>
 
     </div>
