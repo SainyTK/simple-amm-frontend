@@ -59,6 +59,7 @@ const TokenSection = () => {
         ]
     });
 
+
     const { write: transferJPY } = useContractWrite({
         address: ADDRESSES['JPY'],
         abi: ERC20ABI,
@@ -87,6 +88,16 @@ const TokenSection = () => {
         return <div>Token loading is error..</div>
     }
 
+    const token0Name = data[0]?.result || "";
+    const token0Symbol = data[1]?.result || "";
+    const token0Decimals = data[2]?.result || 18;
+    const token0Balance = data[3]?.result || BigInt(0);
+
+    const token1Name = data[4]?.result || "";
+    const token1Symbol = data[5]?.result || "";
+    const token1Decimals = data[6]?.result || 18;
+    const token1Balance = data[7]?.result || BigInt(0);
+
     return (
         <div>
             <div>
@@ -98,14 +109,14 @@ const TokenSection = () => {
                 <input onChange={e => setAmount(e.target.value)}/>
             </div>
             <div>
-                <div>Token Name: {data[0].result}</div>
-                <div>Balance: {formatUnits(data[3].result!, data[2].result!)} {data[1].result}</div>
-                <button onClick={() => transferJPY({ args: [receiver as `0x${string}`, parseUnits(amount, data[2].result!)] })}>Transfer</button>
+                <div>Token Name: {token0Name}</div>
+                <div>Balance: {formatUnits(token0Balance, token0Decimals)} {token0Symbol}</div>
+                <button onClick={() => transferJPY({ args: [receiver as `0x${string}`, parseUnits(amount, token0Decimals)] })}>Transfer</button>
             </div>
             <div>
-                <div>Token Name: {data[4].result}</div>
-                <div>Balance: {formatUnits(data[7].result!, data[6].result!)} {data[5].result}</div>
-                <button onClick={() => transferTHB({ args: [receiver as `0x${string}`, parseUnits(amount, data[6].result!)] })}>Transfer</button>
+                <div>Token Name: {token1Name}</div>
+                <div>Balance: {formatUnits(token1Balance, token1Decimals)} {token1Symbol}</div>
+                <button onClick={() => transferTHB({ args: [receiver as `0x${string}`, parseUnits(amount, token1Decimals)] })}>Transfer</button>
             </div>
       
         </div>

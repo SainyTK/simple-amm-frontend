@@ -424,4 +424,4 @@ export const LPTOKEN_ABI = [
 		"stateMutability": "nonpayable",
 		"type": "function"
 	}
-]
+] as const

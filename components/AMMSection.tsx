@@ -1,39 +1,19 @@
 import React from 'react'
+import LiquiditySection from './LiquiditySection'
+import SwapSection from './SwapSection'
 
 const AMMSection = () => {
-  return (
-    <div>
-
-        <h1>AMMSection</h1>
-
+    return (
         <div>
-            <h2>Token A</h2>
-            <div>
-                Address: <input />
-            </div>
-            <div>
-                Amount: <input />
-            </div>
-        </div>
 
-        <div>
-            <h2>Token B</h2>
-            <div>
-                Address: <input />
-            </div>
-            <div>
-                Amount: <input />
-            </div>
-        </div>
+            <h1>AMMSection</h1>
 
-        <div>
-            <button>Swap</button>
-            <button>Add</button>
-            <button>Remove</button>
-        </div>
+            <LiquiditySection />
 
-    </div>
-  )
+            <SwapSection />
+
+        </div>
+    )
 }
 
 export default AMMSection
